@@ -1,66 +1,43 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Container from 'react-bootstrap/Container'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
-import Offcanvas from 'react-bootstrap/Offcanvas'
-import './navstyle.css';
 
-function BAR() {
-    return (
-
-      <Navbar bg="dark" variant='dark' expand={false} >
-      <Container fluid className="nav-bar">
-        <Navbar.Brand href="#">BrandName</Navbar.Brand>
-       
-           <div className="box1">
-           
-        <Nav.Link href="#action1" className="nav-link">Home</Nav.Link>
-        <Nav.Link href="#action1" className="nav-link">Collection</Nav.Link>
-        <Nav.Link href="#action1" className="nav-link">Products</Nav.Link>
-        <Nav.Link href="#action1" className="nav-link">About us</Nav.Link>
-        <Nav.Link href="#action1" className="nav-link">Services</Nav.Link>
-           </div>
+function nav() {
+  return (
+    <div>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div className="container-fluid">
+    <a className="navbar-brand" href="#">Navbar</a>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <li className="nav-item">
+          <a className="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link active" aria-current="page" href="#">Features</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link active" aria-current="page" href="#">Pricing</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link active" aria-current="page" href="#">Blog</a>
+        </li>
+        <li className="nav-item">
+        <a className="nav-link active" aria-current="page" href="#">Services</a>
+      </li>
         
-        <div className="box"> 
-        <div className="toggle"><Navbar.Toggle aria-controls="offcanvasNavbar"  /></div>
-        </div>
-
-
-        <Navbar.Offcanvas
-          id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel"
-          placement="end"
-        >
-
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
-              <Nav.Link href="#action1" className="offcanvas-link">Home</Nav.Link>
-              <Nav.Link href="#action2" className="offcanvas-link">Link</Nav.Link>
-              <Nav.Link href="#action2" className="offcanvas-link">Link</Nav.Link>
-              <Nav.Link href="#action2" className="offcanvas-link">Link</Nav.Link>
-            </Nav>
-            <Form className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
-      </Container>
-    </Navbar>
-    )
+    </ul>
+      <form className="d-flex">
+        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button className="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+    </div>
+  )
 }
 
-export default BAR
+export default nav
+
