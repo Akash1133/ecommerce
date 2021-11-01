@@ -1,4 +1,45 @@
-.xyz{
-    height:94vh;
-    
+/* height of images */
+.xyz
+{
+    max-height: 90vh;
+}
+/* caraousel caption */
+.carousel-caption{
+    position: absolute;
+    top:52%;
+    transform: translateY(-80%);
+    left:-20%;
+}
+.carousel-caption h1{
+    font-size: 70px;
+    font-weight: 400;
+    color: black;
+
+}
+.carousel-caption p{
+    font-weight: 600;
+    color: black;
+
+}
+.slider-btn{
+    outline: none;
+    background-color: red;
+    height: 45px;
+    width: 150px;
+    color: white;
+    border: none;
+}
+.footer{
+    background-color: black;
+    color: white;
+
+}
+.footer ul{
+    padding-top: 4rem;
+    list-style-type: none;
+    text-align: left;
+}
+.footer-heading{
+    padding-top: 4rem;
+    padding-bottom: 5rem;
 }
