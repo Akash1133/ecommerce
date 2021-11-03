@@ -1,4 +1,5 @@
 import React from 'react'
+import './footerstyle.css'
 
 function footer() {
   return (
@@ -15,13 +16,13 @@ function footer() {
             </div>  
             <div className="col-md-2">
                  <ul>
-                     <li>
+                      <li>
                        <h4>Heading</h4>
-                     </li>
-                     <li>
+                      </li>
+                       <li>
                        links
-                     </li>
-                     <li>
+                      </li>
+                       <li>
                        links
                      </li>
                      <li>

@@ -1,11 +1,14 @@
-.footer-items{
-    background-color: gray;
+.footer{
+    background-color: black;
     color: white;
-   
-    height: 60%;
+
 }
-.list-items{
+.footer ul{
+    padding-top: 4rem;
     list-style-type: none;
     text-align: left;
-    padding-left: 20%;
+}
+.footer-heading{
+    padding-top: 4rem;
+    padding-bottom: 5rem;
 }
