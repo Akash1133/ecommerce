@@ -1,0 +1,152 @@
+/* height of images */
+.xyz
+{
+    max-height: 90vh;
+}
+/* caraousel caption */
+.carousel-caption{
+    position: absolute;
+    top:52%;
+    transform: translateY(-80%);
+    left:-20%;
+}
+.carousel-caption h1{
+    font-size: 70px;
+    font-weight: 400;
+    color: black;
+
+}
+.carousel-caption p{
+    font-weight: 600;
+    color: black;
+
+}
+/* fadeinup */
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+.animated {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 2s;
+    animation-iteration-count: infinite;
+    -webkit-animation-fill-mode: both
+}
+
+.animatedFadeInUp {
+    opacity: 0
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+}
+/* fade in up */
+
+/* slider */
+.slider-btn{
+    outline: none;
+    background-color:#0062cc;
+    height: 45px;
+    width: 150px;
+    color: white;
+    border: none;
+    box-shadow: inset 0 0 0 0 white;
+   -webkit-transition: ease-out 0.4s;
+   -moz-transition: ease-out 0.4s;
+   transition: ease-out 0.4s;
+}
+.slider-btn:hover{
+    box-shadow: inset 400px 0 0 0 white;
+    color:#0062cc;
+    font-weight: 600;
+}
+/* slider end */
+
+.product_hover{
+    position: absolute;
+    left:0;
+    width: 100%;
+    bottom: 60px;
+    text-align: center;
+}
+.product_hover li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 20px ;
+    top: 100px;
+    position: relative;
+    opacity: 0;
+}
+.product_hover li:last-child{
+    margin-right: 0px;
+}
+.product_hover li:hover a{
+   color: red;
+
+}
+.product_hover li:hover a i{
+    color: #fd5c63;
+    transform: rotate(360deg);
+}
+.product_hover:li a{
+    font-size: 18px;
+    color: #000;
+    display: block;
+    width: 45px;
+    height: 45px;
+    background-color: #fff;
+    line-height: 45px;
+    border-color: 50px;
+    box-shadow:0 0 25px rgba(24, 24,24, 0.4) ;
+    transition: all 0.5s;
+}
+
+.product_hover:li a i{
+    position: relative;
+    display:inline-block;
+    transform: rotate(0);
+    transition: all 0.3s;
+}
+.product_item:hover{
+    -webkit-transform: translate(0, -8px);
+	-moz-transform: translate(0, -8px);
+	-ms-transform: translate(0, -8px);
+	-o-transform: translate(0, -8px);
+	transform: translate(0, -8px);
+	box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+}
+
+.product_item:hover .product_hover li{
+    opacity: 1;
+    top:0;
+
+}
+.icn{
+    font-size: 40px;
+    color: red;
+}
+
+.rupee{
+    padding-right: 2%;
+}
