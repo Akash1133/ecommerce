@@ -1,6 +1,9 @@
 import React from 'react'
+
 import './nav.css'
-function nav() {
+
+function NAV() {
+  
   const cartconatiner={
     position:'relative'
   }
@@ -47,7 +50,7 @@ function nav() {
       <li className="nav-item">
         <a className="nav-link active ps-5 me-5 navbar-link" aria-current="page" href="/register">
         <div style={cartconatiner}>
-        <i class="fa" style={{fontsize:"24px"}}>&#xf07a;</i>
+        <i class="fa" style={{fontsize:"24px"}}  >&#xf07a;</i>
         <span style={badge}> 5 </span>
         </div>
         </a>
@@ -60,5 +63,5 @@ function nav() {
   )
 }
 
-export default nav
+export default NAV
 
