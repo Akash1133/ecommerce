@@ -37,11 +37,11 @@
     outline: none;
     border-radius: 60px;
     font-weight: 600;
-    background: rgba(223,56,56);
+    background: #0062cc!important;
     color:white;
 
 }
 .login-btn:hover{
-    background: rgb(252, 61, 61);
+    background: rgb(51, 149, 255)!important;
     transition: 0.5s;
 }

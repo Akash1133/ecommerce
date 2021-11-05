@@ -1,15 +1,28 @@
 import React from 'react'
+import axios from 'axios'
+import { useState,useEffect } from 'react'
 import image1 from './static/image1.jpg'
 import image2 from './static/image2.jpg'
 import image3 from './static/image3.jpg'
-import product1 from './static/product-1.jpg'
-import product2 from './static/product-2.jpg'
-import product3 from './static/product-3.jpg'
-import product4 from './static/product-4.jpg'
+import { Link } from 'react-router-dom'
 
 import './menu.css'
 
-function menu() {
+function MENU() {
+  const [product, setproduct] = useState([]);
+  useEffect(async() => {
+    const fetchdata=async()=>{
+        
+        const {data}=await axios.get(`http://localhost:5000/api/product?new=4`)
+        setproduct(data)
+        }
+    fetchdata()
+}, [])
+
+
+
+
+
   return (
     <div>
     <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
@@ -105,59 +118,36 @@ function menu() {
   </div>
      <section>
          <div className="container py-5">
-           <h1 className="text-center">New Collection</h1>
-           <div className="row py-5">
-               <div className="col-lg-3">
-                 <div class="card product_item">
-                   <img src={product1} className="fluid"/>
-                  
-                   <ul className="product_hover">
-                   <li><a href="#"><i class="fa-solid fa-cart-shopping icn" ></i></a></li>
-                   <li><a href="#"><i class="fa-solid fa-heart icn" ></i></a></li>
-                   <li><a href="#"><i class="fa-solid fa-magnifying-glass icn"></i></a></li>
-                   </ul>
-                
-                   <h5>PRODUCT NAME</h5>
-                   <p>Display Price</p>
-               </div>   
-           </div>
-               <div className="col-lg-3">
-                 <div class="card product_item">
-                   <img src={product2} className="fluid"/>
-                   <ul className="product_hover">
-                   <li><a href="#"><i class="fa-solid fa-cart-shopping icn" ></i></a></li>
-                   <li><a href="#"><i class="fa-solid fa-heart icn" ></i></a></li>
-                   <li><a href="#"><i class="fa-solid fa-magnifying-glass icn"></i></a></li>
-                   </ul>
-                   <h5>PRODUCT NAME</h5>
-                   <p>Display Price</p>
-               </div> 
-               </div>
-               <div className="col-lg-3">
-                 <div class="card product_item">
-                   <img src={product3} className="fluid"/>
-                   <ul className="product_hover">
-                   <li><a href="#"><i class="fa-solid fa-cart-shopping icn" ></i></a></li>
-                   <li><a href="#"><i class="fa-solid fa-heart icn" ></i></a></li>
-                   <li><a href="#"><i class="fa-solid fa-magnifying-glass icn"></i></a></li>
-                   </ul>
-                   <h5>PRODUCT NAME</h5>
-                   <p>Display Price</p>
-               </div> 
-               </div>
-               <div className="col-lg-3">
-                 <div class="card product_item">
-                   <img src={product4} className="fluid"/>
-                   <ul className="product_hover">
-                   <li><a href="#"><i class="fa-solid fa-cart-shopping icn" ></i></a></li>
-                   <li><a href="#"><i class="fa-solid fa-heart icn" ></i></a></li>
-                   <li><a href="#"><i class="fa-solid fa-magnifying-glass icn"></i></a></li>
-                   </ul>
-                   <h5>PRODUCT NAME</h5>
-                   <p>Display Price</p>
-               </div> 
+           <h1 className="text-center" style={{color:'#0062cc'}}>New Collection</h1>
+           <div class="row mt-5">
+        {        
+        product.map(item=>(
+        <div class="col-md-3">
+           <div class="card product-top">
+           <img src={item.img} alt="" class="img-fluid"/>
+               <div class="overlay">
+                   <button type="button" class="btn btn-secondary" title="quick shop" >
+                   <Link to={`/singleproduct/${item._id}`}> <i class=" category-icon fa-solid fa-eye">
+                     
+                       </i> </Link>
+                        
+                   </button>
+                   <button type="button" class="btn btn-secondary" title="Add shop">
+                       <i class=" category-icon fa-solid fa-heart"></i>
+                   </button>
+                   <button type="button" class="btn btn-secondary" title="Add to cart">
+                       <i class="category-icon fa-solid fa-cart-shopping"></i>
+                   </button>
                </div>
            </div>
+           <div class="text-center">
+               <h3>{item.title}</h3>
+               <p><i class="fa fa-inr rupee" aria-hidden="true"></i>{item.price}</p>
+           </div>
+        </div>
+       ))
+        }
+        </div>
          </div>
      </section>
       
@@ -172,4 +162,4 @@ function menu() {
   )
 }
 
-export default menu
+export default MENU

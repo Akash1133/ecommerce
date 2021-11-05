@@ -6,6 +6,7 @@ import PRODUCTPAGE from './singleproduct/productpage';
 import ALLPRODUCT from './products/product'
 import LOGIN from './account/login';
 import SIGNUP from './account/signup';
+import PRODUCT from './components/allproduct'
 
 import {BrowserRouter as Router ,Route,Switch} from 'react-router-dom'
 
@@ -19,7 +20,7 @@ function App() {
        <Route exact path='/'>
        <HOME/>
        </Route>
-       <Route exact path='/singleproduct'>
+       <Route exact path='/singleproduct/:id'>
        <PRODUCTPAGE/>
        </Route>
        <Route exact path='/login'>
@@ -31,6 +32,10 @@ function App() {
        <Route exact path='/products'>
        <ALLPRODUCT/>
        </Route>
+       <Route exact path='/product'>
+       <PRODUCT/>
+       </Route>
+
        
        
        </Switch>

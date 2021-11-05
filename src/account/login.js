@@ -14,7 +14,7 @@ function login() {
 
 
             <div className="col-lg-7 text-center py-5">
-                <h1>
+                <h1 style={{color:'#0062cc'}}>
                     Login
                 </h1>  
                 <form>

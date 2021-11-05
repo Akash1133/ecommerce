@@ -3,7 +3,11 @@
     font-weight: 500;
 }
 .navbar-brand{
-    color:black;
+    color: #0062cc !important;
     font-size: 30px;
     font-weight: 800;
+}
+
+.navbar-link:hover{
+color: #0062cc!important;
 }

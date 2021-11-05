@@ -66,7 +66,7 @@
 /* slider */
 .slider-btn{
     outline: none;
-    background-color: red;
+    background-color:#0062cc;
     height: 45px;
     width: 150px;
     color: white;
@@ -78,7 +78,8 @@
 }
 .slider-btn:hover{
     box-shadow: inset 400px 0 0 0 white;
-    color:red;
+    color:#0062cc;
+    font-weight: 600;
 }
 /* slider end */
 
@@ -144,4 +145,8 @@
 .icn{
     font-size: 40px;
     color: red;
+}
+
+.rupee{
+    padding-right: 2%;
 }
