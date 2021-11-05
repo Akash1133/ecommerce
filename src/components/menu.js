@@ -20,7 +20,45 @@ function MENU() {
 }, [])
 
 
-
+    //
+    function addProduct(item){
+      let products = [];
+      console.log("hello")
+      if(localStorage.getItem('products')){
+          products = JSON.parse(localStorage.getItem('products'));
+      }
+      if(products.length==0)
+           {
+              products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':1});
+              localStorage.setItem('products', JSON.stringify(products));
+           }
+       else{
+         if(products.some((p)=> p.productId === item._id))
+         {
+          var a=products.map((p)=>{
+            if(p.productId === item._id)
+            {
+              var x=p.quantity + 1;
+              var id=p.productId;
+              let storageProducts = JSON.parse(localStorage.getItem('products'));
+              let products = storageProducts.filter(product => product.productId !== id );
+              localStorage.setItem('products', JSON.stringify(products));
+              products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':x});
+              localStorage.setItem('products', JSON.stringify(products));
+              return p.productId;
+            }
+          })
+         }
+  
+         else{
+          products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':1});
+          localStorage.setItem('products', JSON.stringify(products));
+         }
+         
+         }
+  
+  
+      }
 
 
   return (
@@ -135,7 +173,7 @@ function MENU() {
                    <button type="button" class="btn btn-secondary" title="Add shop">
                        <i class=" category-icon fa-solid fa-heart"></i>
                    </button>
-                   <button type="button" class="btn btn-secondary" title="Add to cart">
+                   <button onClick={()=>addProduct(item)}type="button" class="btn btn-secondary" title="Add to cart">
                        <i class="category-icon fa-solid fa-cart-shopping"></i>
                    </button>
                </div>
