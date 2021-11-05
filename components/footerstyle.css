@@ -1,0 +1,17 @@
+.footer{
+    background-color: black;
+    color: white;
+
+}
+.footer ul{
+    padding-top: 4rem;
+    list-style-type: none;
+    text-align: left;
+}
+.footer-heading{
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+}
+.footer-button{
+    background-color: #0062cc!important;
+}
