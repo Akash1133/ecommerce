@@ -1,8 +1,12 @@
 import React from 'react'
+import { useState,useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import './nav.css'
 
 function NAV() {
+  
+  const abc = useSelector(state => state.cart.quantity)
   
   const cartconatiner={
     position:'relative'
@@ -21,7 +25,17 @@ function NAV() {
 
  };
 
-
+ function gettingcartno()
+   {
+     
+      if(localStorage.getItem('products')){
+      var l = JSON.parse(localStorage.getItem('products')).length;
+      return l;
+      }    
+      return 0; 
+   }
+  var cartno= gettingcartno()
+   
   return (
     <div>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,7 +65,7 @@ function NAV() {
         <a className="nav-link active ps-5 me-5 navbar-link" aria-current="page" href="/register">
         <div style={cartconatiner}>
         <i class="fa" style={{fontsize:"24px"}}  >&#xf07a;</i>
-        <span style={badge}> 5 </span>
+        <span style={badge}>{cartno} </span>
         </div>
         </a>
       </li>

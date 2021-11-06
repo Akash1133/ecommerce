@@ -7,12 +7,17 @@ import ALLPRODUCT from './products/product'
 import LOGIN from './account/login';
 import SIGNUP from './account/signup';
 import PRODUCT from './components/allproduct'
+import store from './components/redux/store'
+import CART from './cart/cartpage'
 
 import {BrowserRouter as Router ,Route,Switch} from 'react-router-dom'
+import { Provider } from 'react-redux';
 
 function App() {
   return (
+    <Provider store={store}>
     <Router basename="app">
+   
     <div className="App">
        <NAV/>
        <div>
@@ -32,6 +37,11 @@ function App() {
        <Route exact path='/products'>
        <ALLPRODUCT/>
        </Route>
+       <Route exact path='/cart'>
+       <CART/>
+       </Route>
+
+
        <Route exact path='/product'>
        <PRODUCT/>
        </Route>
@@ -42,7 +52,9 @@ function App() {
        </div>
        <FOOTER/>
        </div>
+      
        </Router>
+       </Provider>
         
   );
 }

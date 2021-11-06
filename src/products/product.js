@@ -5,13 +5,60 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import ALLPRODUCT from '../components/allproduct'
 import {Link, Redirect} from 'react-router-dom'
-import { useHistory } from "react-router-dom";
+import { addProduct } from '../components/redux/cartredux'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 
 function PRODUCT() {
    const [product, setproduct] = useState([]);
    const [category, setcategory] = useState("");
+
+
+    const quantity = useSelector(state => state.cart.quantity) 
+    console.log(quantity)
+    const dispatch=useDispatch();
+
+   function addcart(item){
+
+    dispatch(addProduct({item,quantity}))
+
+    let products = [];
+    console.log("hello")
+    if(localStorage.getItem('products')){
+        products = JSON.parse(localStorage.getItem('products'));
+    }
+    if(products.length==0)
+         {
+            products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':1});
+            localStorage.setItem('products', JSON.stringify(products));
+         }
+     else{
+       if(products.some((p)=> p.productId === item._id))
+       {
+        var a=products.map((p)=>{
+          if(p.productId === item._id)
+          {
+            var x=p.quantity + 1;
+            var id=p.productId;
+            let storageProducts = JSON.parse(localStorage.getItem('products'));
+            let products = storageProducts.filter(product => product.productId !== id );
+            localStorage.setItem('products', JSON.stringify(products));
+            products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':x});
+            localStorage.setItem('products', JSON.stringify(products));
+            return p.productId;
+          }
+        })
+       }
+
+       else{
+        products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':1});
+        localStorage.setItem('products', JSON.stringify(products));
+       }
+       
+       }
+       }
 
    useEffect(async() => {
        const fetchdata=async()=>{
@@ -29,20 +76,14 @@ function PRODUCT() {
        fetchdata()
    }, [category])
 
-
-
-
      const handler=(e)=>{
      console.log(e.target.value);
      setcategory(e.target.value);
     
         }
-    let history = useHistory();
+    
 
-    const handleClick=()=>{
-        history.push("/singleproduct");
-
-    }    
+    
 
     return (
         <div>
@@ -88,7 +129,7 @@ function PRODUCT() {
                    <button type="button" class="btn btn-secondary" title="Add shop">
                        <i class=" category-icon fa-solid fa-heart"></i>
                    </button>
-                   <button type="button" class="btn btn-secondary" title="Add to cart">
+                   <button onClick={()=>addcart(item)} class="btn btn-secondary" title="Add to cart">
                        <i class="category-icon fa-solid fa-cart-shopping"></i>
                    </button>
                </div>

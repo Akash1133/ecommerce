@@ -5,62 +5,68 @@ import image1 from './static/image1.jpg'
 import image2 from './static/image2.jpg'
 import image3 from './static/image3.jpg'
 import { Link } from 'react-router-dom'
+import { addProduct } from './redux/cartredux'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import './menu.css'
 
+
 function MENU() {
   const [product, setproduct] = useState([]);
+  
   useEffect(async() => {
     const fetchdata=async()=>{
         
         const {data}=await axios.get(`http://localhost:5000/api/product?new=4`)
         setproduct(data)
         }
-    fetchdata()
-}, [])
+        fetchdata()
+     }, [])
+    
+     const quantity = useSelector(state => state.cart.quantity) 
+     console.log(quantity)
+      const dispatch=useDispatch();
+      
+      function handleclick(item)
+      {
+          dispatch(addProduct({item,quantity}))
 
-
-    //
-    function addProduct(item){
-      let products = [];
-      console.log("hello")
-      if(localStorage.getItem('products')){
-          products = JSON.parse(localStorage.getItem('products'));
-      }
-      if(products.length==0)
-           {
+          let products = [];
+          if(localStorage.getItem('products')){
+              products = JSON.parse(localStorage.getItem('products'));
+          }
+          if(products.length==0)
+               {
+                  products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':1});
+                  localStorage.setItem('products', JSON.stringify(products));
+               }
+           else{
+             if(products.some((p)=> p.productId === item._id))
+             {                                                                                                                          
+              var a=products.map((p)=>{
+                if(p.productId === item._id)
+                {
+                  var x=p.quantity + 1;
+                  var id=p.productId;
+                  let storageProducts = JSON.parse(localStorage.getItem('products'));
+                  let products = storageProducts.filter(product => product.productId !== id );
+                  localStorage.setItem('products', JSON.stringify(products));
+                  products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':x});
+                  localStorage.setItem('products', JSON.stringify(products));
+                  return p.productId;
+                }
+              })
+             }
+      
+             else{
               products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':1});
               localStorage.setItem('products', JSON.stringify(products));
-           }
-       else{
-         if(products.some((p)=> p.productId === item._id))
-         {
-          var a=products.map((p)=>{
-            if(p.productId === item._id)
-            {
-              var x=p.quantity + 1;
-              var id=p.productId;
-              let storageProducts = JSON.parse(localStorage.getItem('products'));
-              let products = storageProducts.filter(product => product.productId !== id );
-              localStorage.setItem('products', JSON.stringify(products));
-              products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':x});
-              localStorage.setItem('products', JSON.stringify(products));
-              return p.productId;
-            }
-          })
-         }
-  
-         else{
-          products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':1});
-          localStorage.setItem('products', JSON.stringify(products));
-         }
-         
-         }
-  
-  
+             }
+             
+             }
       }
-
-
+  
   return (
     <div>
     <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
@@ -173,7 +179,7 @@ function MENU() {
                    <button type="button" class="btn btn-secondary" title="Add shop">
                        <i class=" category-icon fa-solid fa-heart"></i>
                    </button>
-                   <button onClick={()=>addProduct(item)}type="button" class="btn btn-secondary" title="Add to cart">
+                   <button onClick={()=>handleclick(item)}type="button" class="btn btn-secondary" title="Add to cart">
                        <i class="category-icon fa-solid fa-cart-shopping"></i>
                    </button>
                </div>
@@ -188,13 +194,6 @@ function MENU() {
         </div>
          </div>
      </section>
-      
-     
-
-
-
-
-
     </div>
 
   )

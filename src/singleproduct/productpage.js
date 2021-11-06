@@ -1,23 +1,69 @@
 import React,{useEffect ,useState} from 'react'
 import { useLocation  } from 'react-router';
 import axios from 'axios';
+import { addProduct } from '../components/redux/cartredux'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+
 
 import './productpage.css'
+import { Link } from 'react-router-dom';
 
 function PRODUCTPAGE() {
     
   const[product,setproduct]= useState([]);
   const location=useLocation();
   const id=location.pathname.split("/")[2];
+  const quantity = useSelector(state => state.cart.quantity) 
+  console.log(quantity)
+  const dispatch=useDispatch();
+
+  function addcart(item){
+
+    dispatch(addProduct({item,quantity}))
+
+    let products = [];
+    if(localStorage.getItem('products')){
+        products = JSON.parse(localStorage.getItem('products'));
+    }
+    if(products.length==0)
+         {
+            products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':1});
+            localStorage.setItem('products', JSON.stringify(products));
+         }
+    else{
+          if(products.some((p)=> p.productId === item._id))
+          {
+             var a=products.map((p)=>{
+             if(p.productId === item._id)
+             {
+                var x=p.quantity + 1;
+                var id=p.productId;
+                let storageProducts = JSON.parse(localStorage.getItem('products'));
+                let products = storageProducts.filter(product => product.productId !== id );
+                localStorage.setItem('products', JSON.stringify(products));
+                products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':x});
+                localStorage.setItem('products', JSON.stringify(products));
+                return p.productId;
+             }
+           })
+          }
+
+          else{
+                products.push({'productId' : item._id, 'image' : item.img ,'price':item.price ,'title' :item.title,'quantity':1});
+                localStorage.setItem('products', JSON.stringify(products));
+              }
+        }
+  }
+
  
   useEffect(async() => {
     const fetchdata=async()=>{
-        
         const {data}=await axios.get(`http://localhost:5000/api/product/find/${id}`)
         setproduct(data)
-        }
+      }
     fetchdata()
-}, [id])
+  }, [id])
           
         
 
@@ -44,7 +90,6 @@ function PRODUCTPAGE() {
                           </div>
                         </div>
                       </div>
-
                 </div>
                 <div class="col-md-7">
                      <p class="newarrival text-center">New</p>
@@ -56,9 +101,11 @@ function PRODUCTPAGE() {
                      <p><b>Brand:</b> XYZ Company</p>
                      <label>Quantity:</label>
                     <input type="text" value="1"/>
-                     <button type="button" class="btn btn-default cart">Add to cart</button>
+                    <Link to='/cart'>
+                     <button onClick={()=>addcart(product)} type="button" class="btn btn-default cart">Add to cart</button>
+                     </Link>
                 </div>
-            </div>
+              </div>
         </div>
     </section>
 
