@@ -24,15 +24,15 @@ function NAV() {
   width: '15px'
 
  };
-
- function gettingcartno()
+   
+   function gettingcartno()
    {
-     
       if(localStorage.getItem('products')){
       var l = JSON.parse(localStorage.getItem('products')).length;
       return l;
       }    
       return 0; 
+     
    }
   var cartno= gettingcartno()
    
@@ -62,10 +62,10 @@ function NAV() {
         <a className="nav-link active ps-5 navbar-link" aria-current="page" href="/register">SignUp</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link active ps-5 me-5 navbar-link" aria-current="page" href="/register">
+        <a className="nav-link active ps-5 me-5 navbar-link" aria-current="page" href="/cart">
         <div style={cartconatiner}>
         <i class="fa" style={{fontsize:"24px"}}  >&#xf07a;</i>
-        <span style={badge}>{cartno} </span>
+        <span style={badge}> {cartno} </span>
         </div>
         </a>
       </li>
